@@ -56,7 +56,15 @@
     <select id="queryForPageItemsByPrice" resultType="com.edric.pojo.Book">
         select *
         from book.t_book
-        where price between #{min} and #{max} order by price limit #{begin}, #{pageSize};
+        where price between #{min} and #{max}
+        order by price limit #{begin}, #{pageSize};
     </select>
+
+    <update id="updateBookSalesAndStockByBookIdAndQuantity">
+        update book.t_book
+        set stock = stock - #{quantity},
+            sales = sales + #{quantity}
+        where id = #{bookId};
+    </update>
 
 </mapper>

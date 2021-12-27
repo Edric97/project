@@ -36,7 +36,12 @@ public class UserController {
             model.addAttribute("email", email);
             return "user/regist";
         } else {
-            userService.registerUser(new User(null, username, password, email));
+            User user = new User(null, username, password, email);
+            userService.registerUser(user);
+            int userId = userService.findUserId(username, password);
+            if (userId != -1) {
+                httpSession.setAttribute("userId", userId);
+            }
             return "user/regist_success";
         }
 
@@ -45,6 +50,10 @@ public class UserController {
     @RequestMapping("/login")
     public String login(String username, String password, Model model, HttpSession httpSession) {
         User loginUser = new User(null, username, password, null);
+        int userId = userService.findUserId(username, password);
+        if (userId != -1) {
+            httpSession.setAttribute("userId", userId);
+        }
         if (userService.login(loginUser) != null) {
             httpSession.setAttribute("user", loginUser);
             return "user/login_success";

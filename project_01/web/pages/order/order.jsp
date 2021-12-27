@@ -1,9 +1,17 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>我的订单</title>
     <%@include file="/pages/common/header.jsp" %>
+    <script type="text/javascript">
+        $(function () {
+            var tmpDate = new Date(timestamp);
+        });
+    </script>
     <style type="text/css">
         h1 {
             text-align: center;
@@ -26,28 +34,29 @@
             <td>日期</td>
             <td>金额</td>
             <td>状态</td>
-            <td>详情</td>
-        </tr>
-        <tr>
-            <td>2015.04.23</td>
-            <td>90.00</td>
-            <td>未发货</td>
-            <td><a href="#">查看详情</a></td>
         </tr>
 
-        <tr>
-            <td>2015.04.20</td>
-            <td>20.00</td>
-            <td>已发货</td>
-            <td><a href="#">查看详情</a></td>
-        </tr>
+        <c:forEach items="${myOrder}" var="order">
+            <tr>
+                <td>${order.timestamp.toString()}</td>
+                <td>${order.amount}</td>
+                <td>
+                    <c:choose>
+                        <c:when test="${order.status == 0}">
+                            未发货
+                        </c:when>
+                        <c:when test="${order.status == 1}">
+                            已发货
+                        </c:when>
+                        <c:otherwise>
+                            已收货
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+            </tr>
+        </c:forEach>
 
-        <tr>
-            <td>2014.01.23</td>
-            <td>190.00</td>
-            <td>已完成</td>
-            <td><a href="#">查看详情</a></td>
-        </tr>
+
     </table>
 
 

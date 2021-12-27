@@ -4,6 +4,8 @@ import com.edric.pojo.User;
 
 public interface UserService {
 
+    int findUserId(String username, String password);
+
     // 注册
     void registerUser(User user);
 

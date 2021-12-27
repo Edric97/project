@@ -29,5 +29,5 @@ public interface UserMapper {
     int saveUser(User user);
 
 
-
+    Integer findUserId(@Param("username") String username, @Param("password") String password);
 }

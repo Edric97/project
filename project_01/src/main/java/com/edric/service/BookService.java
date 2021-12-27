@@ -20,4 +20,6 @@ public interface BookService {
     Page<Book> page(Integer pageNo, Integer pageSize);
 
     Page<Book> pageByPrice(Integer min, Integer max, Integer pageNo, Integer pageSize);
+
+    void updateBookSalesAndStockByBookIdAndQuantity(Integer bookId, Integer quantity);
 }

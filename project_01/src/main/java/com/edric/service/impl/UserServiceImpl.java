@@ -17,6 +17,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int findUserId(String username, String password) {
+        return userMapper.findUserId(username, password);
+    }
+
+    @Override
     public void registerUser(User user) {
         if (userMapper.queryUserByUsernameAndPassword(user.getUsername(), user.getPassword()) == null) {
             userMapper.saveUser(user);

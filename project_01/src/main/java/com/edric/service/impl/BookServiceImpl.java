@@ -99,4 +99,9 @@ public class BookServiceImpl implements BookService {
 
         return page;
     }
+
+    @Override
+    public void updateBookSalesAndStockByBookIdAndQuantity(Integer bookId, Integer quantity) {
+        bookMapper.updateBookSalesAndStockByBookIdAndQuantity(bookId, quantity);
+    }
 }

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edric.dao.CartMapper">
+
+    <select id="cart" parameterType="Integer" resultType="com.edric.pojo.CartItem">
+        select id, `name`, quantity, bookId, price, userId
+        from book.t_cart
+        where userId = #{userId};
+    </select>
+
+    <select id="queryCertainBook" resultType="Integer">
+        select quantity
+        from book.t_cart
+        where userId = #{userId}
+          and bookId = #{bookId};
+    </select>
+
+    <select id="addBook" parameterType="com.edric.pojo.CartItem" resultType="Integer">
+        insert into book.t_cart (id, `name`, quantity, price, userId, bookId)
+        values (#{id}, #{name}, #{quantity}, #{price}, #{userId}, #{bookId});
+    </select>
+
+    <delete id="deleteBook" parameterType="Integer">
+        delete
+        from book.t_cart
+        where userId = #{userId}
+          and bookId = #{bookId};
+    </delete>
+
+    <update id="updateBook" parameterType="Integer">
+        update book.t_cart
+        set quantity = #{quantity}
+        where userId = #{userId}
+          and bookId = #{bookId};
+    </update>
+
+    <select id="totalQuantity" resultType="int">
+        select sum(quantity)
+        from book.t_cart
+        where userId = #{userId};
+    </select>
+
+    <select id="totalPrice" resultType="BigDecimal">
+        select sum(price * quantity)
+        from book.t_cart
+        where userId = #{userId};
+    </select>
+
+    <delete id="clearAll" parameterType="Integer">
+        delete
+        from book.t_cart
+        where userId = #{userId};
+    </delete>
+
+    <delete id="deleteBookByUserId" parameterType="Integer">
+        delete
+        from book.t_cart
+        where userId = #{userId};
+    </delete>
+
+    <select id="queryBookIdByUserId" resultType="Integer">
+        select bookId
+        from t_cart
+        where userId = #{userId};
+    </select>
+
+</mapper>

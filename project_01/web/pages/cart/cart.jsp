@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -23,37 +24,26 @@
             <td>金额</td>
             <td>操作</td>
         </tr>
-        <tr>
-            <td>时间简史</td>
-            <td>2</td>
-            <td>30.00</td>
-            <td>60.00</td>
-            <td><a href="#">删除</a></td>
-        </tr>
 
-        <tr>
-            <td>母猪的产后护理</td>
-            <td>1</td>
-            <td>10.00</td>
-            <td>10.00</td>
-            <td><a href="#">删除</a></td>
-        </tr>
+        <c:forEach items="${cart}" var="cart">
+            <tr>
+                <td>${cart.name}</td>
+                <td>${cart.quantity}</td>
+                <td>${cart.price}</td>
+                <td>${cart.quantity * cart.price}</td>
+                <td><a href="${pageContext.request.contextPath}/cart/delete?bookId=${cart.bookId}">删除</a></td>
+            </tr>
+        </c:forEach>
 
-        <tr>
-            <td>百年孤独</td>
-            <td>1</td>
-            <td>20.00</td>
-            <td>20.00</td>
-            <td><a href="#">删除</a></td>
-        </tr>
+
 
     </table>
 
     <div class="cart_info">
-        <span class="cart_span">购物车中共有<span class="b_count">4</span>件商品</span>
-        <span class="cart_span">总金额<span class="b_price">90.00</span>元</span>
-        <span class="cart_span"><a href="#">清空购物车</a></span>
-        <span class="cart_span"><a href="pages/cart/checkout.jsp">去结账</a></span>
+        <span class="cart_span">购物车中共有<span class="b_count">${totalQuantity}</span>件商品</span>
+        <span class="cart_span">总金额<span class="b_price">${totalPrice}</span>元</span>
+        <span class="cart_span"><a href="${pageContext.request.contextPath}/cart/clearAll">清空购物车</a></span>
+        <span class="cart_span"><a href="${pageContext.request.contextPath}/order/createOrder?userId=${sessionScope.userId}">去结账</a></span>
     </div>
 
 </div>

@@ -21,4 +21,8 @@
         values (#{username}, #{password}, #{email});
     </insert>
 
+    <select id="findUserId" resultType="Integer">
+        select id from t_user where username = #{username} and password = #{password};
+    </select>
+
 </mapper>

@@ -11,6 +11,8 @@
     <mappers>
         <mapper class="com.edric.dao.UserMapper"/>
         <mapper class="com.edric.dao.BookMapper"/>
+        <mapper class="com.edric.dao.CartMapper"/>
+        <mapper class="com.edric.dao.OrderMapper"/>
     </mappers>
 
 </configuration>

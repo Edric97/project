@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edric.dao.OrderMapper">
+
+    <insert id="createOrder" parameterType="com.edric.pojo.Order">
+        insert into book.t_order(userId, status, amount, orderTime)
+        values (#{userId}, #{status}, #{amount}, #{timestamp});
+    </insert>
+
+    <select id="getLastedOrderId" resultType="Integer">
+        select orderId
+        from book.t_order
+        order by orderId desc limit 1
+    </select>
+
+    <insert id="addOrderItem">
+        insert into book.t_orderItem(orderId, name, quantity, price, bookId, userId)
+        values
+        <foreach collection="cartOfUserId" item="it" index="index" separator=",">
+            (#{orderId},
+            #{it.name},
+            #{it.quantity},
+            #{it.price},
+            #{it.bookId},
+            #{it.userId})
+        </foreach>
+    </insert>
+
+    <select id="getMyOrder" parameterType="Integer" resultType="com.edric.pojo.Order">
+        select *
+        from book.t_order
+        where userId = #{userId};
+    </select>
+
+</mapper>
