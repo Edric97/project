@@ -4,7 +4,7 @@
 * 数据库：mysql
 * 框架：Spring + SpringMVC + Mybatis
 
-另外：项目中涵盖了：jsp页面，EL表达式，JSTL标签库，JQuery框架，Session会话等。
+另外：项目中涵盖了：lombok插件，jsp页面，EL表达式，JSTL标签库，JQuery框架，Session会话等。
 
 项目完成了一个简单的书城项目：
 
